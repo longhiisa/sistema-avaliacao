@@ -1,0 +1,184 @@
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f1f3f6;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* CONTAINER CENTRAL */
+.container{
+    width:900px;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.15);
+    overflow:hidden;
+}
+
+/* BARRA SUPERIOR IGUAL SISTEMA */
+.headerProva{
+    background:#1f4e79;
+    color:white;
+    padding:14px 22px;
+    font-size:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* TELA INICIAL */
+#inicio{
+    padding:40px;
+    text-align:center;
+}
+
+#inicio h1{
+    margin-bottom:25px;
+    color:#1f4e79;
+}
+
+#inicio input{
+    width:100%;
+    padding:14px;
+    margin:8px 0;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:15px;
+}
+
+#inicio input:focus{
+    border-color:#1f4e79;
+    outline:none;
+}
+
+/* BOTÕES */
+button{
+    padding:12px 18px;
+    border:none;
+    border-radius:6px;
+    background:#1f4e79;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    background:#163a59;
+}
+
+/* QUIZ */
+#quiz{
+    padding:25px 35px;
+}
+
+/* número questão */
+#numeroQuestao{
+    font-weight:600;
+    color:#555;
+    margin-bottom:15px;
+}
+
+/* barra progresso */
+.barra{
+    height:6px;
+    background:#e4e7eb;
+    border-radius:5px;
+    margin-bottom:25px;
+}
+
+#progresso{
+    height:100%;
+    width:0%;
+    background:#1f4e79;
+    border-radius:5px;
+    transition:.3s;
+}
+
+/* pergunta */
+#pergunta{
+    margin-bottom:20px;
+    color:#222;
+    font-size:20px;
+}
+
+/* alternativas estilo prova */
+#alternativas{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.alternativa{
+    border:1px solid #cfd6de;
+    border-radius:8px;
+    padding:14px 16px;
+    cursor:pointer;
+    transition:.2s;
+    background:white;
+}
+
+.alternativa:hover{
+    border-color:#1f4e79;
+    background:#f5f9ff;
+}
+
+.alternativa input{
+    margin-right:10px;
+}
+
+.alternativa.selecionada{
+    border:2px solid #1f4e79;
+    background:#e9f2ff;
+    font-weight:600;
+}
+
+/* navegação */
+.botoesNav{
+    display:flex;
+    justify-content:space-between;
+    margin-top:25px;
+}
+
+#btnFinalizar{
+    width:100%;
+    margin-top:20px;
+    background:#2e7d32;
+}
+
+#btnFinalizar:hover{
+    background:#1b5e20;
+}
+
+/* RESULTADO */
+#resultado{
+    padding:40px;
+    text-align:center;
+}
+
+#resultado h2{
+    color:#2e7d32;
+    margin-bottom:15px;
+}
+
+#correcao{
+    margin-top:20px;
+    text-align:left;
+    background:#f5f7fa;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid #dfe3e8;
+}
+
+#notaFinal{
+    font-weight:bold;
+    margin-bottom:15px;
+    color:#1f4e79;
+}

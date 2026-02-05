@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Sistema de Avaliação</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- TELA INICIAL -->
+    <div id="inicio">
+        <h1>Plataforma de Avaliação</h1>
+
+        <input type="text" id="nomeAluno" placeholder="Nome completo">
+        <input type="email" id="emailAluno" placeholder="E-mail">
+        <input type="text" id="linkProva" placeholder="Cole aqui o link da prova">
+
+        <button id="btnIniciar">Acessar Prova</button>
+    </div>
+
+    <!-- PROVA -->
+    <div id="quiz" style="display:none;">
+
+        <div class="headerProva">
+            <div id="dadosTopo"></div>
+            <div id="numeroQuestao"></div>
+        </div>
+
+        <div class="barra"><div id="progresso"></div></div>
+
+        <h2 id="pergunta"></h2>
+        <div id="alternativas"></div>
+
+        <div class="botoesNav">
+            <button id="btnAnterior">Anterior</button>
+            <button id="btnProxima">Próxima</button>
+        </div>
+
+        <button id="btnFinalizar">Finalizar Prova</button>
+
+    </div>
+
+    <!-- RESULTADO -->
+    <div id="resultado" style="display:none;">
+        <h2>Prova enviada com sucesso!</h2>
+        <p id="resumoAluno"></p>
+
+        <button id="btnVerResultado">Ver Correção</button>
+
+        <div id="correcao" style="display:none;">
+            <p id="notaFinal"></p>
+            <div id="respostasUsuario"></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

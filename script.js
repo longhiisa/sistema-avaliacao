@@ -1,86 +1,162 @@
 const perguntas = [
-    {pergunta:"Capital do Brasil?", alternativas:["RJ","Brasília","SP","BH"], correta:"Brasília"},
-    {pergunta:"2+2?", alternativas:["3","4","5","6"], correta:"4"},
-    {pergunta:"HTML é?", alternativas:["Banco","Marcação","SO","Jogo"], correta:"Marcação"}
-    ];
-    
-    let indice=0;
-    let respostas=new Array(perguntas.length).fill(null);
-    let nome="",email="",link="";
-    
-    const inicio=document.getElementById("inicio");
-    const quiz=document.getElementById("quiz");
-    const resultado=document.getElementById("resultado");
-    
-    /* iniciar */
-    btnIniciar.onclick=()=>{
-    nome=nomeAluno.value;
-    email=emailAluno.value;
-    link=linkProva.value;
-    
-    if(!nome||!email||!link) return alert("Preencha tudo!");
-    
-    inicio.style.display="none";
-    quiz.style.display="block";
-    
-    dadosTopo.textContent=`${nome} | ${email}`;
-    mostrarPergunta();
+    {
+        pergunta: "Qual é o resultado de 5 + 3?",
+        alternativas: ["6", "7", "8", "9"],
+        correta: 2
+    },
+    {
+        pergunta: "Quanto é 10% de 200?",
+        alternativas: ["10", "20", "30", "40"],
+        correta: 1
+    },
+    {
+        pergunta: "Qual é o resultado de 9 × 7?",
+        alternativas: ["63", "56", "72", "49"],
+        correta: 0
+    },
+    {
+        pergunta: "Se um produto custa R$ 150 e recebe 20% de desconto, qual será o valor final?",
+        alternativas: ["R$ 120", "R$ 130", "R$ 110", "R$ 100"],
+        correta: 0
+    },
+    {
+        pergunta: "Quanto é 25% de 80?",
+        alternativas: ["15", "20", "25", "30"],
+        correta: 1
+    },
+    {
+        pergunta: "Um valor de R$ 1.000 aplicado a juros simples de 10% ao ano renderá quanto após 1 ano?",
+        alternativas: ["R$ 100", "R$ 110", "R$ 1.100", "R$ 900"],
+        correta: 0
+    },
+    {
+        pergunta: "Qual é o resultado de 12 × 4?",
+        alternativas: ["36", "44", "48", "52"],
+        correta: 2
+    },
+    {
+        pergunta: "Se um produto aumentou 10% e passou a custar R$ 220, qual era o preço inicial?",
+        alternativas: ["R$ 200", "R$ 210", "R$ 190", "R$ 180"],
+        correta: 0
+    },
+    {
+        pergunta: "Quanto é 50% de 60?",
+        alternativas: ["20", "25", "30", "35"],
+        correta: 2
+    },
+    {
+        pergunta: "Qual é o resultado de 100 − 37?",
+        alternativas: ["63", "73", "67", "60"],
+        correta: 0
     }
-    
-    /* mostrar */
-    function mostrarPergunta(){
-    let q=perguntas[indice];
-    
-    numeroQuestao.textContent=`Questão ${indice+1} de ${perguntas.length}`;
-    pergunta.textContent=q.pergunta;
-    
-    progresso.style.width=((indice)/perguntas.length)*100+"%";
-    
-    alternativas.innerHTML="";
-    
-    q.alternativas.forEach(alt=>{
-    let div=document.createElement("label");
-    div.className="alternativa";
-    div.innerHTML=`<input type="radio" name="resp">${alt}`;
-    
-    if(respostas[indice]===alt) div.classList.add("selecionada");
-    
-    div.onclick=()=>{
-    respostas[indice]=alt;
-    document.querySelectorAll(".alternativa").forEach(e=>e.classList.remove("selecionada"));
-    div.classList.add("selecionada");
+];
+
+let atual = 0;
+let respostas = [];
+let tempo = 1800; // 30 minutos
+
+const inicio = document.getElementById("inicio");
+const quiz = document.getElementById("quiz");
+const resultado = document.getElementById("resultado");
+
+const perguntaEl = document.getElementById("pergunta");
+const alternativasEl = document.getElementById("alternativas");
+const progressoEl = document.getElementById("progresso");
+const tempoEl = document.getElementById("tempo");
+
+document.getElementById("btnIniciar").onclick = () => {
+    const nome = document.getElementById("nomeAluno").value;
+    const email = document.getElementById("emailAluno").value;
+
+    if (!nome || !email) {
+        alert("Preencha todos os campos.");
+        return;
     }
-    
-    alternativas.appendChild(div);
+
+    document.getElementById("infoAluno").innerText = nome;
+
+    inicio.classList.remove("ativa");
+    quiz.classList.add("ativa");
+
+    iniciarTimer();
+    carregarPergunta();
+};
+
+function carregarPergunta() {
+    const p = perguntas[atual];
+    perguntaEl.innerText = p.pergunta;
+    alternativasEl.innerHTML = "";
+
+    p.alternativas.forEach((alt, i) => {
+        const div = document.createElement("div");
+        div.classList.add("alternativa");
+        div.innerText = alt;
+
+        if (respostas[atual] === i) {
+            div.classList.add("selecionada");
+        }
+
+        div.onclick = () => {
+            respostas[atual] = i;
+            carregarPergunta();
+        };
+
+        alternativasEl.appendChild(div);
     });
+
+    progressoEl.style.width =
+        ((atual + 1) / perguntas.length) * 100 + "%";
+}
+
+document.getElementById("btnProxima").onclick = () => {
+    if (atual < perguntas.length - 1) {
+        atual++;
+        carregarPergunta();
     }
-    
-    /* navegação */
-    btnProxima.onclick=()=>{
-    if(indice<perguntas.length-1){indice++;mostrarPergunta();}
+};
+
+document.getElementById("btnAnterior").onclick = () => {
+    if (atual > 0) {
+        atual--;
+        carregarPergunta();
     }
-    
-    btnAnterior.onclick=()=>{
-    if(indice>0){indice--;mostrarPergunta();}
-    }
-    
-    /* finalizar */
-    btnFinalizar.onclick=()=>{
-    quiz.style.display="none";
-    resultado.style.display="block";
-    resumoAluno.textContent=`${nome} (${email}) enviou a prova.`;
-    }
-    
-    /* ver correção */
-    btnVerResultado.onclick=()=>{
-    let acertos=0;
-    
-    respostasUsuario.innerHTML=respostas.map((r,i)=>{
-    if(r===perguntas[i].correta) acertos++;
-    return `Questão ${i+1}: sua resposta "${r}" | correta "${perguntas[i].correta}"`;
-    }).join("<br>");
-    
-    notaFinal.textContent=`Você acertou ${acertos} de ${perguntas.length}`;
-    correcao.style.display="block";
-    }
-    
+};
+
+document.getElementById("btnFinalizar").onclick = finalizar;
+
+function finalizar() {
+    let acertos = 0;
+
+    perguntas.forEach((p, i) => {
+        if (respostas[i] === p.correta) {
+            acertos++;
+        }
+    });
+
+    quiz.classList.remove("ativa");
+    resultado.classList.add("ativa");
+
+    document.getElementById("resumo").innerText =
+        `Você acertou ${acertos} de ${perguntas.length} questões.`;
+
+    document.getElementById("nota").innerText =
+        `Nota Final: ${((acertos / perguntas.length) * 10).toFixed(1)}`;
+}
+
+function iniciarTimer() {
+    const intervalo = setInterval(() => {
+        tempo--;
+
+        let minutos = Math.floor(tempo / 60);
+        let segundos = tempo % 60;
+
+        tempoEl.innerText =
+            String(minutos).padStart(2, "0") + ":" +
+            String(segundos).padStart(2, "0");
+
+        if (tempo <= 0) {
+            clearInterval(intervalo);
+            finalizar();
+        }
+    }, 1000);
+}

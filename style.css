@@ -1,184 +1,230 @@
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-body{
-    background:#f1f3f6;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f0f14;
+    overflow-x: hidden;
 }
 
-/* CONTAINER CENTRAL */
-.container{
-    width:900px;
-    background:white;
-    border-radius:10px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.15);
-    overflow:hidden;
+/* FUNDO DECORATIVO */
+.background {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at top left, #8b0000, transparent 45%),
+        radial-gradient(circle at bottom right, #b71c1c, transparent 45%);
+    z-index: -1;
 }
 
-/* BARRA SUPERIOR IGUAL SISTEMA */
-.headerProva{
-    background:#1f4e79;
-    color:white;
-    padding:14px 22px;
-    font-size:14px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+/* CARD PRINCIPAL */
+.card {
+    width: 100%;
+    max-width: 760px;
+    background: #ffffff;
+    padding: 48px;
+    border-radius: 28px;
+    box-shadow: 0 35px 90px rgba(0,0,0,0.45);
+    animation: fadeIn 0.6s ease;
 }
 
-/* TELA INICIAL */
-#inicio{
-    padding:40px;
-    text-align:center;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-#inicio h1{
-    margin-bottom:25px;
-    color:#1f4e79;
+/* TELAS */
+.tela {
+    display: none;
 }
 
-#inicio input{
-    width:100%;
-    padding:14px;
-    margin:8px 0;
-    border-radius:6px;
-    border:1px solid #ccc;
-    font-size:15px;
+.tela.ativa {
+    display: block;
 }
 
-#inicio input:focus{
-    border-color:#1f4e79;
-    outline:none;
+/* TÍTULOS */
+h1, h2 {
+    text-align: center;
+    color: #7f0000;
+    margin-bottom: 16px;
 }
 
-/* BOTÕES */
-button{
-    padding:12px 18px;
-    border:none;
-    border-radius:6px;
-    background:#1f4e79;
-    color:white;
-    font-weight:600;
-    cursor:pointer;
-    transition:.2s;
+.subtitulo {
+    text-align: center;
+    color: #666;
+    margin-bottom: 32px;
+    font-size: 15px;
 }
 
-button:hover{
-    background:#163a59;
+/* INPUTS */
+input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 16px;
+    border-radius: 14px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    transition: 0.3s;
 }
 
-/* QUIZ */
-#quiz{
-    padding:25px 35px;
+input:focus {
+    border-color: #b71c1c;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(183,28,28,0.2);
 }
 
-/* número questão */
-#numeroQuestao{
-    font-weight:600;
-    color:#555;
-    margin-bottom:15px;
+/* BOTÕES GERAIS */
+button {
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-/* barra progresso */
-.barra{
-    height:6px;
-    background:#e4e7eb;
-    border-radius:5px;
-    margin-bottom:25px;
+/* BOTÃO PRINCIPAL */
+.btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, #7f0000, #d32f2f);
+    color: white;
 }
 
-#progresso{
-    height:100%;
-    width:0%;
-    background:#1f4e79;
-    border-radius:5px;
-    transition:.3s;
+/* BOTÃO FINALIZAR */
+.btn-danger {
+    width: 100%;
+    background: linear-gradient(135deg, #4a0000, #7f0000);
+    color: white;
+    margin-top: 18px;
 }
 
-/* pergunta */
-#pergunta{
-    margin-bottom:20px;
-    color:#222;
-    font-size:20px;
+/* BOTÕES NAVEGAÇÃO */
+.navegacao {
+    display: flex;
+    gap: 16px;
+    margin-top: 30px;
 }
 
-/* alternativas estilo prova */
-#alternativas{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+/* ANTERIOR */
+#btnAnterior {
+    flex: 1;
+    background: #e5e5e5;
+    color: #333;
 }
 
-.alternativa{
-    border:1px solid #cfd6de;
-    border-radius:8px;
-    padding:14px 16px;
-    cursor:pointer;
-    transition:.2s;
-    background:white;
+#btnAnterior:hover {
+    background: #d6d6d6;
 }
 
-.alternativa:hover{
-    border-color:#1f4e79;
-    background:#f5f9ff;
+/* PRÓXIMA */
+#btnProxima {
+    flex: 1;
+    background: linear-gradient(135deg, #8b0000, #d32f2f);
+    color: white;
 }
 
-.alternativa input{
-    margin-right:10px;
+#btnProxima:hover {
+    box-shadow: 0 12px 30px rgba(183,28,28,0.45);
 }
 
-.alternativa.selecionada{
-    border:2px solid #1f4e79;
-    background:#e9f2ff;
-    font-weight:600;
+/* TOPO */
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #7f0000;
+    font-weight: bold;
+    margin-bottom: 14px;
 }
 
-/* navegação */
-.botoesNav{
-    display:flex;
-    justify-content:space-between;
-    margin-top:25px;
+/* BARRA PROGRESSO */
+.barra {
+    width: 100%;
+    height: 11px;
+    background: #eee;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 28px;
 }
 
-#btnFinalizar{
-    width:100%;
-    margin-top:20px;
-    background:#2e7d32;
+#progresso {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7f0000, #ff5252);
+    transition: width 0.4s ease;
 }
 
-#btnFinalizar:hover{
-    background:#1b5e20;
+/* CONTEÚDO */
+.conteudo {
+    margin-bottom: 25px;
+}
+
+/* PERGUNTA */
+#pergunta {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 22px;
+    line-height: 1.4;
+}
+
+/* ALTERNATIVAS */
+#alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.alternativa {
+    padding: 15px;
+    border-radius: 14px;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+.alternativa:hover {
+    border-color: #d32f2f;
+    background: #ffeaea;
+}
+
+.alternativa.selecionada {
+    background: #ffd6d6;
+    border-color: #7f0000;
+    font-weight: bold;
 }
 
 /* RESULTADO */
-#resultado{
-    padding:40px;
-    text-align:center;
+#resultado {
+    text-align: center;
 }
 
-#resultado h2{
-    color:#2e7d32;
-    margin-bottom:15px;
+#nota {
+    margin-top: 22px;
+    font-size: 24px;
+    color: #7f0000;
+    font-weight: bold;
 }
 
-#correcao{
-    margin-top:20px;
-    text-align:left;
-    background:#f5f7fa;
-    padding:20px;
-    border-radius:10px;
-    border:1px solid #dfe3e8;
-}
+/* RESPONSIVO */
+@media (max-width: 620px) {
+    .card {
+        padding: 30px;
+    }
 
-#notaFinal{
-    font-weight:bold;
-    margin-bottom:15px;
-    color:#1f4e79;
+    .topo {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    #pergunta {
+        font-size: 18px;
+    }
 }
